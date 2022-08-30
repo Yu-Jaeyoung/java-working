@@ -6,9 +6,9 @@ public class LoginApplication {
     private static User[] userArray = new User[10];
     private static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        boolean run = true;
-        while (run) {
+    //main 메소드 1번 while문 활용
+    /*public static void main(String[] args) {
+        while (true) {
             System.out.println("--------------------------------------------------------");
             System.out.println(" 1. Create Account 2. Login 3. Search 4. Resign 5. Exit");
             System.out.println("--------------------------------------------------------");
@@ -25,10 +25,38 @@ public class LoginApplication {
             } else if (selectNo == 4) {
                 resign();
             } else if (selectNo == 5) {
-                run = false;
+                System.out.println("Program End");
+                System.exit(0);
             }
         }
-        System.out.println("Program End");
+    }*/
+
+    //main 메소드 2번 do-while문 활용
+    public static void main(String[] args) {
+        int selectNum;
+        do {
+            System.out.println("--------------------------------------------------------");
+            System.out.println(" 1. Create Account 2. Login 3. Search 4. Resign 5. Exit");
+            System.out.println("--------------------------------------------------------");
+            System.out.println("Select > ");
+            selectNum = scanner.nextInt();
+
+            if (selectNum == 1) {
+                newAccount();
+            } else if (selectNum == 2) {
+                logIn();
+            } else if (selectNum == 3) {
+                search();
+            } else if (selectNum == 4) {
+                resign();
+            }
+        }
+        while (selectNum != 5);
+        {
+            System.out.println("Program End");
+            System.exit(0);
+        }
+
     }
 
     //회원가입
@@ -89,11 +117,20 @@ public class LoginApplication {
         if (count) {
             System.out.println("Login succeed");
             System.out.println("Id : " + id);
-            System.out.println("Nickname : " + userNickname(id, password));
+            System.out.println("Nickname : " + userArray[userNum(id)].getNickname());
         }
         if (!count) {
             System.out.println("Login failed");
         }
+
+        /*if (count) {
+            System.out.println("Login succeed");
+            System.out.println("Id : " + id);
+            System.out.println("Nickname : " + userNickname(id, password));
+        }
+        if (!count) {
+            System.out.println("Login failed");
+        }*/
     }
 
     //사용자 조회
@@ -167,7 +204,7 @@ public class LoginApplication {
                 // if (newId.equals(id) && newPassword.equals(password)) {
                 // 기존 id와 newId의 equals 리턴값과 newPassword와 password의 리턴값이 같으면 1을 반환하도록 한것을
                 // id와 newId의 equals 리턴값(boolean값)이 true 인 경우에
-                // newPassword와 password의 리턴값(boolean값)이 true인 경우 1을 반환하도록 설정
+                // newPassword와 password의 리턴값(boolean값)이 true인 경우 ture를 반환하도록 설정
                 if (newId.equals(id)) {
                     if (newPassword.equals(password)) {
                         return true;
@@ -193,9 +230,28 @@ public class LoginApplication {
         return true;
     }
 
+    //아이디 저장위치 반환 메소드
+    private static int userNum(String id) {
+        for (int i = 0; i < userArray.length; i++) {
+            if (userArray[i] != null) {
+                String newId = userArray[i].getId();
+                if (newId.equals(id)) {
+                    return i;
+                }
+            }
+        }
+        return 0;
+    }
+
+    //프로그램 종료 메소드
+    private static boolean isExit() {
+        return false;
+    }
+
 
     //nickname 반환 메소드
-    private static String userNickname(String id, String password) {
+    //삭제
+    /*private static String userNickname(String id, String password) {
         for (int i = 0; i < userArray.length; i++) {
             if (userArray[i] != null) {
                 String newId = userArray[i].getId();
@@ -207,5 +263,5 @@ public class LoginApplication {
             }
         }
         return "default";
-    }
+    }*/
 }
