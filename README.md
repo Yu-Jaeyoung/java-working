@@ -21,3 +21,8 @@
 5. main 메소드의 종류를 두가지 타입으로 작성
   - while문을 사용하고 종료 메소드를 활용 프로그램 종료
   - do while문을 사용, 종료 메소드를 활용 프로그램 종료
+
+22.08.30 -3
+1. login() 안 변수 count -> check 로 변경
+2. if (count) ~ if (!count)~ 를 if (count) else {} ~로 수정
+3. do-while 문 수정

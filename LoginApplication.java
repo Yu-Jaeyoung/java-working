@@ -7,15 +7,13 @@ public class LoginApplication {
     private static Scanner scanner = new Scanner(System.in);
 
     //main 메소드 1번 while문 활용
-    /*public static void main(String[] args) {
+  /*  public static void main(String[] args) {
         while (true) {
             System.out.println("--------------------------------------------------------");
             System.out.println(" 1. Create Account 2. Login 3. Search 4. Resign 5. Exit");
             System.out.println("--------------------------------------------------------");
             System.out.println("Select > ");
-
             int selectNo = scanner.nextInt();
-
             if (selectNo == 1) {
                 newAccount();
             } else if (selectNo == 2) {
@@ -52,11 +50,8 @@ public class LoginApplication {
             }
         }
         while (selectNum != 5);
-        {
-            System.out.println("Program End");
-            System.exit(0);
-        }
 
+        System.out.println("Program End");
     }
 
     //회원가입
@@ -111,15 +106,14 @@ public class LoginApplication {
         System.out.println();
 
 
-        boolean count;
-        count = matchUser(id, password);
+        boolean check;
+        check = matchUser(id, password);
 
-        if (count) {
+        if (check) {
             System.out.println("Login succeed");
             System.out.println("Id : " + id);
             System.out.println("Nickname : " + userArray[userNum(id)].getNickname());
-        }
-        if (!count) {
+        } else {
             System.out.println("Login failed");
         }
 
@@ -247,7 +241,6 @@ public class LoginApplication {
     private static boolean isExit() {
         return false;
     }
-
 
     //nickname 반환 메소드
     //삭제
