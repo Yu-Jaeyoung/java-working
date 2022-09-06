@@ -50,14 +50,23 @@ public class LoginApplication {
             }
         }
         while (selectNum != 5);
-
+        scanner.close();
         System.out.println("Program End");
     }
 
     //회원가입
     private static void newAccount() {
+        //count 변수를 사용하여 배열이 가득찼는지 여부를 판단
+        int count = -1;
+        for (int i = 0; i < userArray.length; i++) {
+            if (userArray[i] == null) {
+                break;
+            } else {
+                count++;
+            }
+        }
 
-        if (userArray[9] != null) {
+        if (count == userArray.length - 1) {
             System.out.println("Can't Create New Account");
             return;
             //10개의 계정이 가득 찬 상태
@@ -116,37 +125,10 @@ public class LoginApplication {
         } else {
             System.out.println("Login failed");
         }
-
-        /*if (count) {
-            System.out.println("Login succeed");
-            System.out.println("Id : " + id);
-            System.out.println("Nickname : " + userNickname(id, password));
-        }
-        if (!count) {
-            System.out.println("Login failed");
-        }*/
     }
 
     //사용자 조회
-    //toString(문자 열로 만들어 리턴)
     //향상된 for문 사용할 것 ???
-    //향상된 for문 미사용으로 제작해본것
-/*    private static void search() {
-        System.out.println("--------------");
-        System.out.println("Searching");
-        System.out.println("--------------");
-        System.out.println();
-
-        for (int i = 0; i < userArray.length; i++) {
-            if (userArray[i] != null) {
-                String newNickname = userArray[i].getNickname();
-                if (newNickname != null) {
-                    System.out.println(newNickname);
-                    System.out.println();
-                }
-            }
-        }
-    }*/
 
     //향상된 for문으로 작성??
     private static void search() {
@@ -174,11 +156,11 @@ public class LoginApplication {
 
         for (int i = 0; i < userArray.length; i++) {
             if (userArray[i] != null) {
-                String newId = userArray[i].getId();
-                String newPassword = userArray[i].getPassword();
-                if (newId.equals(id) && newPassword.equals(password)) {
+                if (userArray[i].getId().equals(id) && userArray[i].getPassword().equals(password)) {
                     userArray[i] = null;
-                    return; //이 상황에선 탈퇴를 종료
+                    System.out.println("Resign Succeed");
+                    System.out.println();
+                    return; //이 상황에선 탈퇴 메소드 종료
                 }
             }
         }
@@ -242,19 +224,4 @@ public class LoginApplication {
         return false;
     }
 
-    //nickname 반환 메소드
-    //삭제
-    /*private static String userNickname(String id, String password) {
-        for (int i = 0; i < userArray.length; i++) {
-            if (userArray[i] != null) {
-                String newId = userArray[i].getId();
-                String newPassword = userArray[i].getPassword();
-                String newNickname = userArray[i].getNickname();
-                if (newId.equals(id) && newPassword.equals(password)) {
-                    return newNickname;
-                }
-            }
-        }
-        return "default";
-    }*/
 }
